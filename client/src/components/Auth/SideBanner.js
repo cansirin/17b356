@@ -25,14 +25,21 @@ export const SideBanner = () => {
     <Paper style={styles.paperContainer}>
       <Paper style={styles.gradient}>
         <Grid container direction="column" alignItems="center">
-          <SvgIcon
-            component={Bubble}
-            viewBox="0 0 67 67"
-            style={{
-              height: "67px",
-              width: "67px",
+          <Box
+            sx={{
+              px: [2, 2],
+              py: [2, 2],
             }}
-          />
+          >
+            <SvgIcon
+              component={Bubble}
+              viewBox="0 0 67 67"
+              style={{
+                height: "67px",
+                width: "67px",
+              }}
+            />
+          </Box>
           <Box
             sx={{
               px: [2, 2, 4, 8],
