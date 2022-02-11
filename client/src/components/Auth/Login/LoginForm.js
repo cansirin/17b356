@@ -1,7 +1,6 @@
 import {
   Box,
   FormControl,
-  FormHelperText,
   Grid,
   InputAdornment,
   Link,
@@ -17,7 +16,7 @@ export const LoginForm = ({ handleSubmit }) => {
       <Box
         sx={{
           justifyContent: "center",
-          px: [2, 4, 8, 16],
+          px: [10, 10, 16, 20],
         }}
       >
         <Typography align="left" variant="h5" sx={{ fontWeight: "600" }}>
