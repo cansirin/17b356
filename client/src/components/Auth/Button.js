@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px 60px",
     backgroundColor: theme.palette.primary.main,
     color: common.white,
-    fontSize: "18px",
+    fontSize: "14px",
     height: "56px",
     width: "160px",
     left: "0px",
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     top: "0px",
     backgroundColor: common.white,
     color: theme.palette.primary.main,
-    fontSize: "18px",
+    fontSize: "14px",
     boxShadow: "0px 2px 12px 0px rgba(74, 106, 149, 0.2)",
   },
 }));
