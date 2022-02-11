@@ -5,7 +5,7 @@ import { Grid } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 import { LoginForm } from "./components/Auth/Login/LoginForm";
 import { AuthLayout } from "./components/Auth/Layout";
-import { Header } from "./components/Auth/Login/Header";
+import { Header } from "./components/Auth/Header";
 
 const Login = (props) => {
   const history = useHistory();
@@ -26,7 +26,12 @@ const Login = (props) => {
   return (
     <AuthLayout>
       <Grid container item justifyContent="flex-end" alignContent="flex-start">
-        <Header history={history} />
+        <Header
+          history={history}
+          link="/register"
+          text="Don't have an account?"
+          buttonText="Create account"
+        />
       </Grid>
       <LoginForm handleSubmit={handleLogin} />
     </AuthLayout>

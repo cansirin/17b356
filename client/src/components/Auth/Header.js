@@ -1,8 +1,8 @@
 import { Box, Typography } from "@material-ui/core";
-import { AuthSecondaryButton } from "../Button";
+import { AuthSecondaryButton } from "./Button";
 import React from "react";
 
-export const Header = ({ history }) => {
+export const Header = ({ history, link, text, buttonText }) => {
   return (
     <Box
       sx={{
@@ -12,12 +12,12 @@ export const Header = ({ history }) => {
         p: 4,
       }}
     >
-      <Typography color="textSecondary">Don't have an account?</Typography>
+      <Typography color="textSecondary">{text}</Typography>
       <AuthSecondaryButton
         variant="contained"
-        onClick={() => history.push("/register")}
+        onClick={() => history.push(link)}
       >
-        Create account
+        {buttonText}
       </AuthSecondaryButton>
     </Box>
   );
