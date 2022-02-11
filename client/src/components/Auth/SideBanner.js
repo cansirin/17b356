@@ -2,8 +2,9 @@ import { Box, Grid, Paper, SvgIcon, Typography } from "@material-ui/core";
 import bg from "../../images/bg-img.png";
 import { ReactComponent as Bubble } from "../../images/bubble.svg";
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
   paperContainer: {
     backgroundImage: `url(${bg})`,
     backgroundRepeat: "no-repeat",
@@ -18,12 +19,17 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-};
+  icon: {
+    height: "67px",
+    width: "67px",
+  },
+}));
 
 export const SideBanner = () => {
+  const classes = useStyles();
   return (
-    <Paper style={styles.paperContainer}>
-      <Paper style={styles.gradient}>
+    <Paper className={classes.paperContainer}>
+      <Paper className={classes.gradient}>
         <Grid container direction="column" alignItems="center">
           <Box
             sx={{
@@ -34,10 +40,7 @@ export const SideBanner = () => {
             <SvgIcon
               component={Bubble}
               viewBox="0 0 67 67"
-              style={{
-                height: "67px",
-                width: "67px",
-              }}
+              className={classes.icon}
             />
           </Box>
           <Box

@@ -24,13 +24,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "14px",
     boxShadow: "0px 2px 12px 0px rgba(74, 106, 149, 0.2)",
   },
+  box: {
+    padding: "15px",
+  },
 }));
 
 export const AuthSecondaryButton = (props) => {
   const classes = useStyles();
 
   return (
-    <Box style={{ padding: "15px" }}>
+    <Box className={classes.box}>
       <Button className={classes.action} {...props}>
         {props.children}
       </Button>
