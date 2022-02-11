@@ -24,7 +24,6 @@ const ActiveChat = (props) => {
   const classes = useStyles();
   const { user } = props;
   const conversation = props.conversation || {};
-  const messages = [...(conversation.messages || [])].reverse();
 
   return (
     <Box className={classes.root}>
@@ -36,7 +35,7 @@ const ActiveChat = (props) => {
           />
           <Box className={classes.chatContainer}>
             <Messages
-              messages={messages}
+              messages={conversation.messages}
               otherUser={conversation.otherUser}
               userId={user.id}
             />
