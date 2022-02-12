@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Typography } from "@material-ui/core";
+import { Avatar, Box, Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -23,19 +23,52 @@ const useStyles = makeStyles(() => ({
   },
   bubble: {
     background: "#F4F6FA",
-    borderRadius: "10px 10px 0 10px"
-  }
+    borderRadius: "10px 10px 0 10px",
+  },
+  userImageMessage: {
+    maxHeight: "300px",
+    maxWidth: "200px",
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  attachments: {
+    rowGap: "10px",
+    columnGap: "10px",
+  },
 }));
 
 const SenderBubble = (props) => {
   const classes = useStyles();
-  const { time, text } = props;
+  const { time, text, attachments } = props;
+
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
-      <Box className={classes.bubble}>
-        <Typography className={classes.text}>{text}</Typography>
-      </Box>
+      <Grid
+        item
+        container
+        direction="row"
+        justifyContent="flex-end"
+        className={classes.attachments}
+      >
+        {attachments &&
+          attachments.map((attachment, idx) => {
+            return (
+              <img
+                alt="attachment"
+                src={attachment}
+                key={idx}
+                className={classes.userImageMessage}
+              />
+            );
+          })}
+      </Grid>
+      {text === "" ? null : (
+        <Box className={classes.bubble}>
+          <Typography className={classes.text}>{text}</Typography>
+        </Box>
+      )}
     </Box>
   );
 };
