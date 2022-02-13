@@ -1,9 +1,9 @@
-import { Dialog, DialogContent, DialogTitle } from "@material-ui/core";
+import {Box, Dialog, DialogContent, DialogTitle} from "@material-ui/core";
 import { ImageUploadForm } from "./ImageUploadForm";
 
 export const ImageUploadDialog = ({ open, dialogControl, imageSubmit }) => {
   return (
-    <div>
+    <Box>
       <Dialog open={open} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add images</DialogTitle>
         <DialogContent>
@@ -13,6 +13,6 @@ export const ImageUploadDialog = ({ open, dialogControl, imageSubmit }) => {
           />
         </DialogContent>
       </Dialog>
-    </div>
+    </Box>
   );
 };
