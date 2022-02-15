@@ -5,34 +5,40 @@ import {
   FormHelperText,
   Grid,
 } from "@material-ui/core";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import axios from "axios";
 
 export const ImageUploadForm = ({ handleClose, imageSubmit }) => {
   const [error, setError] = useState("");
+  const fileInput = useRef(null);
 
-  const handleImageUpload = () => {
-    const { files } = document.querySelector('input[type="file"]');
+  const handleImageUpload = async () => {
+    const { files } = fileInput.current;
     if (files.length === 0) {
       setError("You need to add an image");
     }
     const formData = new FormData();
     formData.append("file", files[0]);
-    formData.append("upload_preset", "hatchway-uploads");
-    const options = {
-      method: "POST",
-      body: formData,
-    };
+    formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET);
 
-    return fetch(
-      "https://api.cloudinary.com/v1_1/csirinhatchway/image/upload",
-      options
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        imageSubmit(res.secure_url);
-        handleClose(true);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const { data } = await axios.post(
+        process.env.REACT_APP_CLOUDINARY_URL,
+        formData,
+        {
+          transformRequest: (data, headers) => {
+            delete headers.common["x-access-token"];
+            delete headers["x-access-token"];
+            return data;
+          },
+        }
+      );
+
+      imageSubmit(data.secure_url);
+      handleClose(true);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -50,7 +56,7 @@ export const ImageUploadForm = ({ handleClose, imageSubmit }) => {
                 Cancel
               </Button>
               <Grid item>
-                <input type="file" accept="image/*" />
+                <input type="file" accept="image/*" ref={fileInput} />
                 <FormHelperText>{error}</FormHelperText>
               </Grid>
               <Button
