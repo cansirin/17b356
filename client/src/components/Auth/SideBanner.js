@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     height: "67px",
     width: "67px",
   },
+  typography: {
+    color: "white",
+  },
 }));
 
 export const SideBanner = () => {
@@ -49,7 +52,11 @@ export const SideBanner = () => {
               py: [2, 2, 4, 8],
             }}
           >
-            <Typography variant="h4" style={{ color: "white" }} align="center">
+            <Typography
+              variant="h4"
+              className={classes.typography}
+              align="center"
+            >
               Converse with anyone with any language
             </Typography>
           </Box>
