@@ -16,7 +16,7 @@ export const LoginForm = ({ handleSubmit }) => {
       <Box
         sx={{
           justifyContent: "center",
-          px: [10, 10, 16, 20],
+          px: [2, 10, 16, 20],
         }}
       >
         <Typography align="left" variant="h5" sx={{ fontWeight: "600" }}>
