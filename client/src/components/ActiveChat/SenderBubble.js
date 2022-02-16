@@ -64,7 +64,7 @@ const SenderBubble = (props) => {
             );
           })}
       </Grid>
-      {text === "" ? null : (
+      {text !== "" && (
         <Box className={classes.bubble}>
           <Typography className={classes.text}>{text}</Typography>
         </Box>

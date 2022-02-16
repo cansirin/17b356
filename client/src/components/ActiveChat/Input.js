@@ -83,19 +83,18 @@ const Input = (props) => {
           onChange={handleChange}
           endAdornment={
             <InputAdornment position="end">
-              {images
-                ? images.map((image, idx) => {
-                    return (
-                      <Avatar
-                        alt="Image Message"
-                        src={image}
-                        key={idx}
-                        onClick={() => deleteImage(idx)}
-                        className={classes.image}
-                      />
-                    );
-                  })
-                : null}
+              {images &&
+                images.map((image, idx) => {
+                  return (
+                    <Avatar
+                      alt="Image Message"
+                      src={image}
+                      key={idx}
+                      onClick={() => deleteImage(idx)}
+                      className={classes.image}
+                    />
+                  );
+                })}
               <IconButton onClick={() => setOpenDialog(!openDialog)}>
                 <InsertPhoto />
               </IconButton>
