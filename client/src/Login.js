@@ -1,15 +1,11 @@
 import React from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  FormControl,
-  TextField,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import { LoginForm } from "./components/Auth/Login/LoginForm";
+import { AuthLayout } from "./components/Auth/Layout";
+import { Header } from "./components/Auth/Header";
 
 const Login = (props) => {
   const history = useHistory();
@@ -28,41 +24,17 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Box>
-    </Grid>
+    <AuthLayout>
+      <Grid container item justifyContent="flex-end" alignContent="flex-start">
+        <Header
+          history={history}
+          link="/register"
+          text="Don't have an account?"
+          buttonText="Create account"
+        />
+      </Grid>
+      <LoginForm handleSubmit={handleLogin} />
+    </AuthLayout>
   );
 };
 
