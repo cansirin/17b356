@@ -7,8 +7,19 @@ import {
 } from "@material-ui/core";
 import { useRef, useState } from "react";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  rightButton: {
+    marginLeft: "20px",
+  },
+  leftButton: {
+    marginRight: "20px",
+  },
+}));
 
 export const ImageUploadForm = ({ handleClose, imageSubmit }) => {
+  const classes = useStyles();
   const [error, setError] = useState("");
   const fileInput = useRef(null);
 
@@ -51,7 +62,7 @@ export const ImageUploadForm = ({ handleClose, imageSubmit }) => {
                 onClick={() => handleClose(false)}
                 color="secondary"
                 variant="contained"
-                style={{ marginRight: "20px" }}
+                className={classes.leftButton}
               >
                 Cancel
               </Button>
@@ -63,7 +74,7 @@ export const ImageUploadForm = ({ handleClose, imageSubmit }) => {
                 color="primary"
                 variant="contained"
                 onClick={handleImageUpload}
-                style={{ marginLeft: "20px" }}
+                className={classes.rightButton}
               >
                 Add
               </Button>

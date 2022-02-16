@@ -15,14 +15,18 @@ import { ImageUploadDialog } from "./ImageUploadDialog";
 const useStyles = makeStyles(() => ({
   root: {
     justifySelf: "flex-end",
-    marginTop: 15
+    marginTop: 15,
   },
   input: {
     height: 70,
     backgroundColor: "#F4F6FA",
     borderRadius: 8,
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
+  image: {
+    width: "56px",
+    height: "56px",
+  },
 }));
 
 const Input = (props) => {
@@ -87,7 +91,7 @@ const Input = (props) => {
                         src={image}
                         key={idx}
                         onClick={() => deleteImage(idx)}
-                        sx={{ width: 56, height: 56 }}
+                        className={classes.image}
                       />
                     );
                   })
