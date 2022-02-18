@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Typography, Avatar } from "@material-ui/core";
+import { Box, Typography, Avatar, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,23 +27,59 @@ const useStyles = makeStyles(() => ({
     fontWeight: "bold",
     color: "#FFFFFF",
     letterSpacing: -0.2,
-    padding: 8
-  }
+    padding: 8,
+  },
+  userImageMessage: {
+    maxHeight: "300px",
+    maxWidth: "200px",
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  attachments: {
+    rowGap: "10px",
+    columnGap: "10px",
+  },
 }));
 
 const OtherUserBubble = (props) => {
   const classes = useStyles();
-  const { text, time, otherUser } = props;
+  const { text, time, otherUser, attachments } = props;
   return (
     <Box className={classes.root}>
-      <Avatar alt={otherUser.username} src={otherUser.photoUrl} className={classes.avatar}></Avatar>
+      <Avatar
+        alt={otherUser.username}
+        src={otherUser.photoUrl}
+        className={classes.avatar}
+      ></Avatar>
       <Box>
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        <Box className={classes.bubble}>
-          <Typography className={classes.text}>{text}</Typography>
-        </Box>
+        <Grid
+          item
+          container
+          direction="row"
+          justifyContent="flex-start"
+          className={classes.attachments}
+        >
+          {attachments &&
+            attachments.map((attachment, idx) => {
+              return (
+                <img
+                  alt="attachment"
+                  src={attachment}
+                  key={idx}
+                  className={classes.userImageMessage}
+                />
+              );
+            })}
+        </Grid>
+        {text !== "" && (
+          <Box className={classes.bubble}>
+            <Typography className={classes.text}>{text}</Typography>
+          </Box>
+        )}
       </Box>
     </Box>
   );

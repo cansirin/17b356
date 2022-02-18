@@ -1,25 +1,39 @@
 import React, { useState } from "react";
-import { FormControl, FilledInput } from "@material-ui/core";
+import {
+  FormControl,
+  FilledInput,
+  InputAdornment,
+  IconButton,
+  Avatar,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { postMessage } from "../../store/utils/thunkCreators";
+import { InsertPhoto } from "@material-ui/icons";
+import { ImageUploadDialog } from "./ImageUploadDialog";
 
 const useStyles = makeStyles(() => ({
   root: {
     justifySelf: "flex-end",
-    marginTop: 15
+    marginTop: 15,
   },
   input: {
     height: 70,
     backgroundColor: "#F4F6FA",
     borderRadius: 8,
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
+  image: {
+    width: "56px",
+    height: "56px",
+  },
 }));
 
 const Input = (props) => {
   const classes = useStyles();
   const [text, setText] = useState("");
+  const [images, setImages] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
   const { postMessage, otherUser, conversationId, user } = props;
 
   const handleChange = (event) => {
@@ -33,10 +47,28 @@ const Input = (props) => {
       text: event.target.text.value,
       recipientId: otherUser.id,
       conversationId,
-      sender: conversationId ? null : user
+      sender: conversationId ? null : user,
+      attachments: images,
     };
     await postMessage(reqBody);
     setText("");
+    setImages([]);
+  };
+
+  const toggleUploadImageDialog = () => {
+    setOpenDialog(!openDialog);
+  };
+
+  const handleImageMessage = (imageUrl) => {
+    const newImages = [...images, imageUrl];
+    setImages(newImages);
+  };
+
+  const deleteImage = (id) => {
+    const newImages = images.filter((_, index) => {
+      return id !== index;
+    });
+    setImages(newImages);
   };
 
   return (
@@ -49,6 +81,30 @@ const Input = (props) => {
           value={text}
           name="text"
           onChange={handleChange}
+          endAdornment={
+            <InputAdornment position="end">
+              {images &&
+                images.map((image, idx) => {
+                  return (
+                    <Avatar
+                      alt="Image Message"
+                      src={image}
+                      key={idx}
+                      onClick={() => deleteImage(idx)}
+                      className={classes.image}
+                    />
+                  );
+                })}
+              <IconButton onClick={() => setOpenDialog(!openDialog)}>
+                <InsertPhoto />
+              </IconButton>
+              <ImageUploadDialog
+                open={openDialog}
+                dialogControl={toggleUploadImageDialog}
+                imageSubmit={handleImageMessage}
+              />
+            </InputAdornment>
+          }
         />
       </FormControl>
     </form>
